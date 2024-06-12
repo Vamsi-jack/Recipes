@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Recipe.Views.CategoryPage"
+              xmlns:customControl="clr-namespace:Recipe.Common" 
+              xmlns:vm="clr-namespace:Recipe.ViewModels"  NavigationPage.HasNavigationBar="False">
+    <ContentPage.BindingContext>
+        <vm:CategoryViewModel />
+    </ContentPage.BindingContext>
+    <ContentPage.Content>
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="0.5*"/>
+                <ColumnDefinition Width="9*"/>
+                <ColumnDefinition Width="0.5*"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <StackLayout Grid.ColumnSpan="3" Grid.Row="0" HeightRequest="45"  BackgroundColor="#21130d">
+                <Label Text="Category"  HorizontalTextAlignment="Center"  Margin="0,10,0,0" VerticalTextAlignment="Center"  FontSize="20" FontAttributes="Bold" TextColor="#FFFFFF"/>
+            </StackLayout>
+                <CollectionView Grid.Row="1" Grid.Column="1" ItemsSource="{Binding Categories}"    >
+                <CollectionView.ItemsLayout>
+                    <GridItemsLayout Orientation="Vertical" Span="3"/>
+                </CollectionView.ItemsLayout>
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <Grid Padding="5">
+                            
+                            <Frame  Padding="8"  BorderColor="#9c9c9c"    CornerRadius="8" HasShadow="False">
+                                <Grid>
+                                    <Grid.RowDefinitions >
+                                        <RowDefinition Height="Auto"/>
+                                        <RowDefinition Height="*"/>
+                                    </Grid.RowDefinitions>
+                                    <customControl:AspectRatioContainer  Grid.Row="0"  AspectRatio="5">
+                                        <Image  Source="{Binding strCategoryThumb}" HorizontalOptions="Fill"  />
+                                    </customControl:AspectRatioContainer>
+
+                                    <Label Grid.Row="1" Text="{Binding strCategory}"  FontSize="14" VerticalOptions="Center" HorizontalOptions="Center" LineBreakMode="TailTruncation"  FontFamily="OpenSansSemibold"/>
+                                </Grid>
+                                <Frame.GestureRecognizers>
+                                    <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped"  CommandParameter="{Binding .}"/>
+                                </Frame.GestureRecognizers>
+                            </Frame>
+                        </Grid>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>

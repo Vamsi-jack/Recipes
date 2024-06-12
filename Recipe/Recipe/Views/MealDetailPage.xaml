@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Recipe.Views.MealDetailPage"
+             xmlns:local="clr-namespace:Recipe.Common" 
+             xmlns:customControl="clr-namespace:Recipe.Common" 
+               xmlns:vm="clr-namespace:Recipe.ViewModels" NavigationPage.HasNavigationBar="False"
+             Title="MealDetailPage">
+    <ContentPage.BindingContext>
+        <vm:MealDetailViewModel />
+    </ContentPage.BindingContext>
+    <ContentPage.Content>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+            <local:NavigationHeader Grid.Row="0"   x:Name="navigationHeader"/>
+            <ScrollView Grid.Row="1">
+                <StackLayout>
+                    <customControl:AspectRatioContainer Margin="10,0"  AspectRatio="0.45">
+                        <Image Source="{Binding MealDetail.strMealThumb}" HorizontalOptions="Center" />
+                    </customControl:AspectRatioContainer>
+                    <Label Text="{Binding MealDetail.strMeal}" FontSize="24" HorizontalOptions="Center"  TextColor="#21130d"/>
+                    <Label Text="{Binding MealDetail.strInstructions}" Margin="10" VerticalTextAlignment="Start"  HorizontalOptions="FillAndExpand" LineBreakMode="WordWrap"/>
+                </StackLayout>
+            </ScrollView>
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>
